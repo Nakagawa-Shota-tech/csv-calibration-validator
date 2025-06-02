@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>CSVロガー検証</title>
+</head>
+<body>
+	<h2>CSVログファイルアップロード</h2>
+
+	<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+		<input type="file" name="file" accept=".csv" required />
+		<button type="submit">アップロード</button>
+	</form>
+
+	<div th:if="${error}" style="color:red;">
+		<p th:text="${error}"></p>
+	</div>
+</body>
+</html>

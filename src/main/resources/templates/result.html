@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>検査結果</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 90%;
+			margin: auto;
+		}
+		th, td {
+			border: 1px solid #999;
+			padding: 8px;
+			text-align: center;
+		}
+		.ok {
+			background-color: #e0ffe0;
+		}
+		.ng {
+			background-color: #ffe0e0;
+		}
+	</style>
+</head>
+<body>
+
+<h2 style="text-align:center;">検査結果</h2>
+
+<div th:if="${error}" style="color:red; text-align:center;">
+	<p th:text="${error}"></p>
+</div>
+
+<table th:if="${records}">
+	<thead>
+	<tr>
+		<th th:each="header : ${headers}" th:text="${header}">ヘッダー</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr th:each="row : ${records}" th:class="${row['Result']} == 'OK' ? 'ok' : 'ng'">
+		<th:block th:each="header : ${headers}">
+			<td th:text="${row.get(header)}">値</td>
+		</th:block>
+	</tr>
+	</tbody>
+</table>
+
+<div style="text-align:center; margin-top:20px;">
+	<a th:href="@{/upload}">← 別のCSVファイルをアップロード</a>
+</div>
+
+</body>
+</html>
